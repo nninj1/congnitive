@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>매일 인지훈련 - 메뉴</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Malgun Gothic', '맑은 고딕', sans-serif;
+        }
+        body {
+            margin: 0;
+            padding: 20px;
+            background-color: #ffffff;
+            color: #111111;
+            font-size: 28px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        /* 상단 날짜 표시 영역 */
+        .date-banner {
+            width: 100%;
+            background-color: #f0f4f8;
+            border: 3px solid #cccccc;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            font-size: 34px;
+            font-weight: bold;
+            color: #1565C0;
+            margin-bottom: 20px;
+            word-break: keep-all;
+        }
+
+        /* 대상자 코드 입력 영역 */
+        .user-input-box {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            background-color: #fffde7;
+            border: 3px solid #fbc02d;
+            border-radius: 16px;
+            padding: 15px 20px;
+        }
+        .user-input-label {
+            font-size: 28px;
+            font-weight: bold;
+            color: #333333;
+        }
+        .user-input-field {
+            font-size: 28px;
+            font-weight: bold;
+            padding: 10px 15px;
+            border: 2px solid #999999;
+            border-radius: 10px;
+            width: 240px;
+            text-align: center;
+        }
+
+        /* 영역 버튼 그리드 레이아웃 */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+        @media (max-width: 650px) {
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .btn-menu {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 120px;
+            background-color: #ffffff;
+            border: 4px solid #4A90E2;
+            border-radius: 20px;
+            padding: 15px 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: all 0.2s;
+            text-decoration: none;
+            color: #111111;
+            width: 100%;
+        }
+        .btn-menu:hover {
+            background-color: #e3f2fd;
+        }
+        .menu-title {
+            font-size: 30px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        .menu-activity {
+            font-size: 22px;
+            color: #555555;
+            margin-bottom: 8px;
+        }
+        .menu-last-record {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2E7D32;
+            background-color: #e8f5e9;
+            padding: 4px 12px;
+            border-radius: 10px;
+            border: 1px solid #a5d6a7;
+        }
+        .menu-last-record.no-record {
+            color: #757575;
+            background-color: #eee;
+            border-color: #ccc;
+        }
+
+        /* 하단 기록 보기 버튼 */
+        .btn-record-view {
+            font-size: 32px;
+            font-weight: bold;
+            min-height: 80px;
+            width: 100%;
+            max-width: 500px;
+            background-color: #616161;
+            color: #ffffff;
+            border: none;
+            border-radius: 16px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- 상단 날짜 및 요일 -->
+        <div class="date-banner" id="date-display">날짜 불러오는 중...</div>
+
+        <!-- 대상자 코드 입력 -->
+        <div class="user-input-box">
+            <span class="user-input-label">대상자 코드:</span>
+            <input type="text" id="subject-input" class="user-input-field" placeholder="대상자 코드" onchange="updateSubjectCode()">
+        </div>
+
+        <!-- 영역 버튼 그리드 -->
+        <div class="menu-grid">
+            
+            <!-- 1. 주의력 (같은 그림 모두 찾기) -->
+            <button class="btn-menu" onclick="navigateTo('01_주의력.html')">
+                <div class="menu-title">🔍 주의력</div>
+                <div class="menu-activity">같은 그림 모두 찾기</div>
+                <div class="menu-last-record" id="rec-주의력-1">불러오는 중...</div>
+            </button>
+
+            <!-- 추가된 활동: 숫자 순서 (주의력 영역 공유) -->
+            <button class="btn-menu" onclick="navigateTo('09_숫자순서.html')">
+                <div class="menu-title">🔢 숫자 순서</div>
+                <div class="menu-activity">숫자 순서대로 누르기</div>
+                <div class="menu-last-record" id="rec-주의력-2">불러오는 중...</div>
+            </button>
+
+            <!-- 2. 기억력 -->
+            <button class="btn-menu" onclick="navigateTo('02_기억력.html')">
+                <div class="menu-title">🧺 기억력</div>
+                <div class="menu-activity">장보기 목록 기억하기</div>
+                <div class="menu-last-record" id="rec-기억력">불러오는 중...</div>
+            </button>
+
+            <!-- 3. 지남력 -->
+            <button class="btn-menu" onclick="navigateTo('03_지남력.html')">
+                <div class="menu-title">📅 지남력</div>
+                <div class="menu-activity">오늘 날짜와 때 알기</div>
+                <div class="menu-last-record" id="rec-지남력">불러오는 중...</div>
+            </button>
+
+            <!-- 4. 실행기능 -->
+            <button class="btn-menu" onclick="navigateTo('04_실행기능.html')">
+                <div class="menu-title">🧩 실행기능</div>
+                <div class="menu-activity">일상 활동의 순서 맞추기</div>
+                <div class="menu-last-record" id="rec-실행기능">불러오는 중...</div>
+            </button>
+
+            <!-- 5. 시공간 -->
+            <button class="btn-menu" onclick="navigateTo('05_시공간.html')">
+                <div class="menu-title">🟦 시공간</div>
+                <div class="menu-activity">본보기와 똑같은 무늬 만들기</div>
+                <div class="menu-last-record" id="rec-시공간">불러오는 중...</div>
+            </button>
+
+            <!-- 6. 계산력 -->
+            <button class="btn-menu" onclick="navigateTo('06_계산력.html')">
+                <div class="menu-title">🧮 계산력</div>
+                <div class="menu-activity">물건 세기와 돈 계산</div>
+                <div class="menu-last-record" id="rec-계산력">불러오는 중...</div>
+            </button>
+
+            <!-- 7. 언어 -->
+            <button class="btn-menu" onclick="navigateTo('07_언어.html')">
+                <div class="menu-title">💬 언어</div>
+                <div class="menu-activity">속담 완성하기</div>
+                <div class="menu-last-record" id="rec-언어">불러오는 중...</div>
+            </button>
+
+        </div>
+
+        <!-- 하단 기록 보기 버튼 -->
+        <button class="btn-record-view" onclick="navigateTo('08_기록보기.html')">📊 기록 보기</button>
+    </div>
+
+    <script>
+        const DAYS_OF_WEEK = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
+        const DOMAINS = ['주의력', '기억력', '지남력', '실행기능', '시공간', '계산력', '언어'];
+
+        window.onload = function() {
+            displayCurrentDate();
+            initSubjectCode();
+            loadLastRecords();
+        };
+
+        function displayCurrentDate() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = now.getMonth() + 1;
+            const date = now.getDate();
+            const dayName = DAYS_OF_WEEK[now.getDay()];
+
+            const dateStr = `${year}년 ${month}월 ${date}일 ${dayName}`;
+            document.getElementById("date-display").textContent = dateStr;
+        }
+
+        function initSubjectCode() {
+            const inputField = document.getElementById("subject-input");
+            let savedSubject = localStorage.getItem("현재대상자");
+
+            if (!savedSubject || savedSubject.trim() === "") {
+                savedSubject = "대상자 A";
+                localStorage.setItem("현재대상자", savedSubject);
+            }
+            inputField.value = savedSubject;
+        }
+
+        function updateSubjectCode() {
+            const inputField = document.getElementById("subject-input");
+            let val = inputField.value.trim();
+            if (val === "") {
+                val = "대상자 A";
+                inputField.value = val;
+            }
+            localStorage.setItem("현재대상자", val);
+            loadLastRecords();
+        }
+
+        function loadLastRecords() {
+            const currentSubject = localStorage.getItem("현재대상자") || "대상자 A";
+            const records = JSON.parse(localStorage.getItem("인지훈련기록") || "[]");
+
+            // 주의력 영역은 두 개의 버튼(01_주의력, 09_숫자순서)이 있으므로 각각 최근 기록을 동일하게 연동하거나 표현
+            DOMAINS.forEach(domain => {
+                const filtered = records.filter(r => r.대상자 === currentSubject && r.영역 === domain);
+                let lastRecord = null;
+                if (filtered.length > 0) {
+                    lastRecord = filtered[filtered.length - 1];
+                }
+
+                let shortDate = "";
+                if (lastRecord && lastRecord.날짜) {
+                    const dateParts = lastRecord.날짜.split(" ")[0].split("-");
+                    if (dateParts.length >= 3) {
+                        shortDate = `${parseInt(dateParts[1])}/${parseInt(dateParts[2])}`;
+                    }
+                }
+
+                if (domain === '주의력') {
+                    // 주의력 버튼 2개 모두에 최신 주의력 기록 반영
+                    ['1', '2'].forEach(idSuffix => {
+                        const badge = document.getElementById(`rec-주의력-${idSuffix}`);
+                        if (badge) {
+                            if (lastRecord) {
+                                badge.textContent = `지난번 ${lastRecord.난이도} · ${lastRecord.정답률}% · ${shortDate}`;
+                                badge.classList.remove("no-record");
+                            } else {
+                                badge.textContent = "아직 기록 없음";
+                                badge.classList.add("no-record");
+                            }
+                        }
+                    });
+                } else {
+                    const badge = document.getElementById(`rec-${domain}`);
+                    if (badge) {
+                        if (lastRecord) {
+                            badge.textContent = `지난번 ${lastRecord.난이도} · ${lastRecord.정답률}% · ${shortDate}`;
+                            badge.classList.remove("no-record");
+                        } else {
+                            badge.textContent = "아직 기록 없음";
+                            badge.classList.add("no-record");
+                        }
+                    }
+                }
+            });
+        }
+
+        function navigateTo(url) {
+            updateSubjectCode();
+            location.href = url;
+        }
+    </script>
+</body>
+</html>
